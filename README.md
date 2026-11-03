@@ -62,6 +62,16 @@ SOLID in practice: small single-purpose services (S), new coupon types / admin m
 callers (O), repositories and strategies behind narrow interfaces (L/I), API URL injected via `API_BASE_URL` token (D).
 Business rules (order workflow, coupon rules, stock, reports) are pure functions in `core/domain` with unit tests.
 
+## Demo data and photo credits
+
+`db.json` has 12 sample products in 4 categories (prices in BDT). Photos are loaded from
+[Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license), so the demo needs internet
+access to show them. Photographers: Luke Peterson (headphones), Roy Wen (keyboard), Auguras Pipiras (smartwatch),
+Nejc Soklič (speaker), Haryo Setyadi (t-shirt), Caio Coelho (denim jacket), Irene Kredenets (sneakers),
+Wiser by the Mile (backpack), Mediamodifier (mug), Jean-Philippe Delberghe (desk lamp), Tuaans (yoga mat),
+quokkabottles (water bottle). Product names, descriptions, prices and stock are invented.
+The sneakers are out of stock and the smartwatch and water bottle are low on stock, to demo those states.
+
 ## Known limits (mock backend)
 
 - Auth, route guards, stock checks, coupon limits and order totals run in the browser. **They are UX only**;
