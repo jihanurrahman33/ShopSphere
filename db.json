@@ -1,0 +1,20 @@
+{
+  "products": [
+    { "id": "1", "name": "Wireless Headphones", "slug": "wireless-headphones", "description": "Premium wireless headphones with noise cancellation.", "price": 4500, "discountPrice": 3999, "images": [], "categoryId": "1", "sku": "ELEC-001", "stock": 25, "status": "active", "featured": true, "createdAt": "2026-10-01T10:00:00Z" },
+    { "id": "2", "name": "Mechanical Keyboard", "slug": "mechanical-keyboard", "description": "RGB mechanical keyboard for productivity.", "price": 5500, "images": [], "categoryId": "1", "sku": "ELEC-002", "stock": 12, "status": "active", "featured": false, "createdAt": "2026-10-05T10:00:00Z" },
+    { "id": "3", "name": "Cotton T-Shirt", "slug": "cotton-t-shirt", "description": "Soft everyday cotton t-shirt.", "price": 850, "images": [], "categoryId": "2", "sku": "FASH-001", "stock": 80, "status": "active", "featured": true, "createdAt": "2026-10-10T10:00:00Z" }
+  ],
+  "categories": [
+    { "id": "1", "name": "Electronics", "slug": "electronics", "status": "active" },
+    { "id": "2", "name": "Fashion", "slug": "fashion", "status": "active" }
+  ],
+  "users": [
+    { "id": "1", "name": "Admin", "email": "admin@shopsphere.dev", "password": "admin123", "role": "admin" },
+    { "id": "2", "name": "Demo Customer", "email": "customer@shopsphere.dev", "password": "customer123", "role": "customer" }
+  ],
+  "orders": [],
+  "coupons": [
+    { "id": "1", "code": "WELCOME10", "type": "percentage", "value": 10, "minPurchase": 1000, "active": true, "usedCount": 0 }
+  ],
+  "inventoryTransactions": []
+}

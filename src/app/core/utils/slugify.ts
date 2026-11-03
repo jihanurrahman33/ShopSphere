@@ -1,0 +1,10 @@
+/** Lowercase, hyphen-separated, ASCII-only URL slug. */
+export function slugify(text: string): string {
+  return text
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
