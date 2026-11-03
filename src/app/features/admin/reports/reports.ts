@@ -11,9 +11,19 @@ const TOP_PRODUCTS_LIMIT = 5;
   selector: 'app-admin-reports',
   imports: [CurrencyPipe],
   template: `
-    <div class="mb-4 flex items-center justify-between">
-      <h1 class="text-2xl font-bold">Reports</h1>
-      <button type="button" class="rounded-lg border border-violet-700 px-4 py-2 text-violet-800" (click)="exportCsv()" [disabled]="!data.hasValue()">Export daily sales (CSV)</button>
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Financial Intelligence</span>
+        <h1 class="text-2xl font-black tracking-tight text-gray-900">Performance Reports</h1>
+      </div>
+      <button
+        type="button"
+        class="inline-flex items-center gap-2 rounded-full border border-[#003d29] px-5 py-2 text-xs font-bold text-[#003d29] hover:bg-[#003d29] hover:text-white transition disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+        (click)="exportCsv()"
+        [disabled]="!data.hasValue()"
+      >
+        <span>📥 Export daily sales (CSV)</span>
+      </button>
     </div>
     @if (data.isLoading()) {
       <p role="status">Loading…</p>

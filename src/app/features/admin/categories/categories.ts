@@ -32,9 +32,22 @@ import { StatusBadge } from '../../../shared/components/status-badge/status-badg
         </select>
       </label>
       @if (message(); as text) { <p role="alert" class="text-rose-700">{{ text }}</p> }
-      <div class="flex gap-3">
-        <button type="submit" class="rounded-lg bg-violet-700 px-4 py-2 font-medium text-white hover:bg-violet-800">Save</button>
-        @if (editing()) { <button type="button" class="rounded-lg border border-gray-400 px-4 py-2" (click)="reset()">Cancel</button> }
+      <div class="flex items-center gap-3 pt-2">
+        <button
+          type="submit"
+          class="rounded-full bg-[#003d29] px-6 py-2 text-xs font-bold text-white shadow-xs hover:bg-[#002e1f] transition cursor-pointer"
+        >
+          Save Category
+        </button>
+        @if (editing()) {
+          <button
+            type="button"
+            class="rounded-full border border-gray-300 bg-white px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-50 cursor-pointer"
+            (click)="reset()"
+          >
+            Cancel
+          </button>
+        }
       </div>
     </form>
 
@@ -54,7 +67,7 @@ import { StatusBadge } from '../../../shared/components/status-badge/status-badg
               <td class="p-3">{{ parentName(c) }}</td>
               <td class="p-3"><app-status-badge [status]="c.status" /></td>
               <td class="space-x-3 p-3">
-                <button type="button" class="text-violet-800 underline" (click)="edit(c)">Edit</button>
+                <button type="button" class="text-[#003d29] font-bold hover:underline cursor-pointer" (click)="edit(c)">Edit</button>
                 @if (pendingDelete() === c.id) {
                   <button type="button" class="font-semibold text-rose-700 underline" (click)="remove(c)">Confirm delete</button>
                   <button type="button" class="underline" (click)="pendingDelete.set(null)">Cancel</button>
