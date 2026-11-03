@@ -1,5 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { canTransition, nextStatuses } from './order-workflow';
+import { canTransition, nextStatuses, trackingSteps } from './order-workflow';
+
+describe('trackingSteps', () => {
+  it('marks earlier steps done, the current one current and the rest upcoming', () => {
+    expect(trackingSteps('processing').map((s) => s.state)).toEqual(['done', 'done', 'current', 'upcoming', 'upcoming']);
+  });
+
+  it('shows delivered as the final current step', () => {
+    expect(trackingSteps('delivered').at(-1)).toEqual({ status: 'delivered', state: 'current' });
+  });
+
+  it('has no timeline for cancelled or returned orders', () => {
+    expect(trackingSteps('cancelled')).toEqual([]);
+    expect(trackingSteps('returned')).toEqual([]);
+  });
+});
 
 describe('order workflow', () => {
   it('allows the forward path', () => {

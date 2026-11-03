@@ -1,6 +1,7 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { nextStatuses } from '../../../core/domain/order-workflow';
 import { Order, OrderStatus } from '../../../core/models';
 import { OrderRepository } from '../../../core/repositories/repositories';
@@ -9,7 +10,7 @@ import { StatusBadge } from '../../../shared/components/status-badge/status-badg
 
 @Component({
   selector: 'app-admin-orders',
-  imports: [CurrencyPipe, DatePipe, StatusBadge],
+  imports: [CurrencyPipe, DatePipe, RouterLink, StatusBadge],
   template: `
     <h1 class="mb-4 text-2xl font-bold">Orders</h1>
     <label class="mb-4 flex max-w-xs flex-col text-sm">Search by order number or customer
@@ -31,7 +32,7 @@ import { StatusBadge } from '../../../shared/components/status-badge/status-badg
         <tbody>
           @for (o of visible(); track o.id) {
             <tr class="border-t border-gray-200">
-              <td class="p-3 font-medium">{{ o.orderNumber }}</td>
+              <td class="p-3 font-medium"><a [routerLink]="['/admin/orders', o.id]" class="text-violet-800 underline">{{ o.orderNumber }}</a></td>
               <td class="p-3">{{ o.shippingAddress.fullName }}</td>
               <td class="p-3">{{ o.createdAt | date: 'short' }}</td>
               <td class="p-3">{{ o.total | currency: 'BDT' : 'symbol-narrow' : '1.0-0' }}</td>
