@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Order } from '../models';
-import { categorySales, dailySales, monthlySales, statusBreakdown, toCsv, topProducts } from './reports';
+import { categorySales, dailySales, monthOverMonth, monthlySales, recentOrders, statusBreakdown, toCsv, topProducts } from './reports';
 
 const order = (over: Partial<Order>): Order => ({
   id: '1', orderNumber: 'SS-1', customerId: 'u1',
@@ -41,6 +41,30 @@ describe('sales reports', () => {
       { status: 'delivered', count: 3 },
       { status: 'cancelled', count: 1 },
     ]);
+  });
+});
+
+describe('dashboard helpers', () => {
+  const orders = [
+    order({ id: '1', total: 300, createdAt: '2026-11-02T10:00:00Z' }),
+    order({ id: '2', total: 200, createdAt: '2026-10-15T10:00:00Z' }),
+    order({ id: '3', total: 100, createdAt: '2026-11-03T10:00:00Z' }),
+  ];
+
+  it('compares this month with last month, including across a year boundary', () => {
+    expect(monthOverMonth(orders, new Date('2026-11-10T00:00:00Z'))).toEqual({ current: 400, previous: 200, changePercent: 100 });
+    const january = [order({ createdAt: '2025-12-20T00:00:00Z', total: 50 })];
+    expect(monthOverMonth(january, new Date('2026-01-05T00:00:00Z')).previous).toBe(50);
+  });
+
+  it('returns a null change when last month had no revenue', () => {
+    expect(monthOverMonth([order({ createdAt: '2026-11-02T00:00:00Z' })], new Date('2026-11-10T00:00:00Z')).changePercent).toBeNull();
+  });
+
+  it('lists the newest orders first without mutating the input', () => {
+    const ids = recentOrders(orders, 2).map((o) => o.id);
+    expect(ids).toEqual(['3', '1']);
+    expect(orders[0].id).toBe('1');
   });
 });
 

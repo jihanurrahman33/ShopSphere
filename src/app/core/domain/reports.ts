@@ -41,6 +41,28 @@ export const dailySales = (orders: readonly Order[]): PeriodSales[] => groupSale
 /** Sales per month (YYYY-MM, UTC), oldest first. */
 export const monthlySales = (orders: readonly Order[]): PeriodSales[] => groupSales(orders, 7);
 
+export interface RevenueComparison {
+  readonly current: number;
+  readonly previous: number;
+  /** null when there was no revenue last month to compare against. */
+  readonly changePercent: number | null;
+}
+
+/** This calendar month (UTC) versus the one before it. `now` is injected for testability. */
+export function monthOverMonth(orders: readonly Order[], now: Date): RevenueComparison {
+  const key = (d: Date): string => d.toISOString().slice(0, 7);
+  const previousMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1));
+  const byMonth = new Map(monthlySales(orders).map((m) => [m.period, m.revenue]));
+  const current = byMonth.get(key(now)) ?? 0;
+  const previous = byMonth.get(key(previousMonth)) ?? 0;
+  return { current, previous, changePercent: previous === 0 ? null : Math.round(((current - previous) / previous) * 100) };
+}
+
+/** Newest first. */
+export function recentOrders(orders: readonly Order[], limit: number): Order[] {
+  return [...orders].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, limit);
+}
+
 export function topProducts(orders: readonly Order[], limit: number): ProductSales[] {
   const totals = new Map<string, ProductSales>();
   for (const order of orders.filter(isRevenueOrder)) {

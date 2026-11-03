@@ -1,59 +1,70 @@
-# Shopsphere
+# ShopSphere
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.5.
+E-commerce frontend with a customer storefront and an admin dashboard.
+Angular 22 (standalone, zoneless, signals) · Tailwind CSS v4 · JSON Server mock API.
 
-## Development server
+## Run it
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Needs Node 22.22.3+ / 24.15+ / 26+.
 
 ```bash
-ng generate component component-name
+npm install
+npm run api     # mock REST API  → http://localhost:3000
+npm start       # Angular app    → http://localhost:4200
+npm test        # unit tests (Vitest)
+npm run build   # production build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Demo logins (mock data in `db.json`, local use only):
 
-```bash
-ng generate --help
+| Role     | Email                    | Password      |
+| -------- | ------------------------ | ------------- |
+| Admin    | admin@shopsphere.dev     | admin123      |
+| Customer | customer@shopsphere.dev  | customer123   |
+
+Coupon to try: `WELCOME10` (10% off, minimum 1000).
+
+## Features
+
+**Storefront** (`/store`): product list with search, category filter and sort · product details ·
+cart with coupons and shipping · checkout · orders · account (profile, address book) · wishlist · register/login.
+
+**Admin** (`/admin`, admin role): dashboard (revenue comparison, 7-day sales, recent orders, top sellers) ·
+products (create/edit, search, pagination) · categories · orders (status workflow) · inventory (stock adjustments + history) ·
+customers · coupons · reports (daily/monthly sales, top products, category sales, CSV export).
+
+## Architecture
+
+```
+src/app/
+├── core/         models, repositories, facades, strategies, factories, domain rules, services, guards, interceptors
+├── shared/       reusable presentational components (product card, status badge, pagination)
+├── layouts/      store-layout, admin-layout
+└── features/     storefront/, admin/, auth/  (lazy-loaded routes)
 ```
 
-## Building
+Data flow: component → service/facade → repository → `HttpClient` → JSON Server.
+Components never call `HttpClient` directly.
 
-To build the project run:
+### Design patterns
 
-```bash
-ng build
-```
+| Pattern                | Where                                                              |
+| ---------------------- | ------------------------------------------------------------------ |
+| Repository             | `core/repositories` (generic `BaseRepository<T>` + per-resource)   |
+| Facade                 | `CartFacade`, `WishlistFacade`                                     |
+| Strategy               | `core/strategies` (discount types, shipping)                       |
+| Factory                | `core/factories/order.factory.ts` (order with price/name snapshot) |
+| Observer               | signals / `computed` / `rxResource` throughout                     |
+| Interceptor chain      | `authInterceptor` → `errorInterceptor`                             |
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+SOLID in practice: small single-purpose services (S), new coupon types / admin menu items added without editing
+callers (O), repositories and strategies behind narrow interfaces (L/I), API URL injected via `API_BASE_URL` token (D).
+Business rules (order workflow, coupon rules, stock, reports) are pure functions in `core/domain` with unit tests.
 
-## Running unit tests
+## Known limits (mock backend)
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Auth, route guards, stock checks, coupon limits and order totals run in the browser. **They are UX only**;
+  a real backend must enforce them (and store hashed passwords).
+- `db.json` stores demo passwords in plain text. Never reuse them.
+- Stock/coupon/ledger updates are separate requests and are not atomic.
+- Not built yet: product images/variants/reviews, order detail & tracking pages, real payments, component tests.
