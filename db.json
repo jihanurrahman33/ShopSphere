@@ -1,17 +1,202 @@
 {
   "products": [
-    { "id": "1", "name": "Wireless Noise-Cancelling Headphones", "slug": "wireless-noise-cancelling-headphones", "description": "Over-ear Bluetooth headphones with active noise cancellation and up to 30 hours of battery life.", "price": 4500, "discountPrice": 3999, "images": ["https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800&q=80&auto=format&fit=crop"], "categoryId": "1", "sku": "ELEC-001", "stock": 25, "status": "active", "featured": true, "createdAt": "2026-10-01T10:00:00Z" },
-    { "id": "2", "name": "RGB Mechanical Keyboard", "slug": "rgb-mechanical-keyboard", "description": "Compact mechanical keyboard with hot-swappable blue switches and per-key RGB lighting.", "price": 5500, "images": ["https://images.unsplash.com/photo-1777259113729-9bda92fb8ce8?w=800&q=80&auto=format&fit=crop"], "categoryId": "1", "sku": "ELEC-002", "stock": 12, "status": "active", "featured": false, "createdAt": "2026-10-03T10:00:00Z" },
-    { "id": "3", "name": "Smartwatch with Heart-Rate Monitor", "slug": "smartwatch-with-heart-rate-monitor", "description": "Water-resistant smartwatch with heart-rate tracking, sleep monitoring and a 7-day battery.", "price": 7990, "discountPrice": 6990, "images": ["https://images.unsplash.com/photo-1624096104992-9b4fa3a279dd?w=800&q=80&auto=format&fit=crop"], "categoryId": "1", "sku": "ELEC-003", "stock": 6, "status": "active", "featured": true, "createdAt": "2026-10-06T10:00:00Z" },
-    { "id": "4", "name": "Portable Bluetooth Speaker", "slug": "portable-bluetooth-speaker", "description": "Rugged portable speaker with deep bass, splash resistance and 12 hours of playtime.", "price": 3490, "images": ["https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&q=80&auto=format&fit=crop"], "categoryId": "1", "sku": "ELEC-004", "stock": 18, "status": "active", "featured": false, "createdAt": "2026-10-08T10:00:00Z" },
-    { "id": "5", "name": "Classic Cotton T-Shirt", "slug": "classic-cotton-t-shirt", "description": "Soft 100% cotton crew-neck t-shirt in white. A comfortable everyday basic.", "price": 850, "images": ["https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=800&q=80&auto=format&fit=crop"], "categoryId": "2", "sku": "FASH-001", "stock": 80, "status": "active", "featured": true, "createdAt": "2026-10-10T10:00:00Z" },
-    { "id": "6", "name": "Denim Button-Up Jacket", "slug": "denim-button-up-jacket", "description": "Mid-weight blue denim jacket with a relaxed fit and classic button front.", "price": 3200, "discountPrice": 2790, "images": ["https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800&q=80&auto=format&fit=crop"], "categoryId": "2", "sku": "FASH-002", "stock": 14, "status": "active", "featured": false, "createdAt": "2026-10-12T10:00:00Z" },
-    { "id": "7", "name": "Lightweight Running Sneakers", "slug": "lightweight-running-sneakers", "description": "Breathable, cushioned running shoes built for daily training and long walks.", "price": 4200, "images": ["https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800&q=80&auto=format&fit=crop"], "categoryId": "4", "sku": "SPRT-001", "stock": 0, "status": "active", "featured": true, "createdAt": "2026-10-14T10:00:00Z" },
-    { "id": "8", "name": "Leather Backpack", "slug": "leather-backpack", "description": "Genuine leather backpack with a padded laptop sleeve and two inner pockets.", "price": 3800, "discountPrice": 3299, "images": ["https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=800&q=80&auto=format&fit=crop"], "categoryId": "2", "sku": "FASH-003", "stock": 20, "status": "active", "featured": true, "createdAt": "2026-10-16T10:00:00Z" },
-    { "id": "9", "name": "White Ceramic Coffee Mug", "slug": "white-ceramic-coffee-mug", "description": "Dishwasher-safe 350 ml ceramic mug with a comfortable handle.", "price": 450, "images": ["https://images.unsplash.com/photo-1616241673111-508b4662c707?w=800&q=80&auto=format&fit=crop"], "categoryId": "3", "sku": "HOME-001", "stock": 60, "status": "active", "featured": false, "createdAt": "2026-10-18T10:00:00Z" },
-    { "id": "10", "name": "Adjustable Desk Lamp", "slug": "adjustable-desk-lamp", "description": "Articulating metal desk lamp with a warm light, ideal for reading and work.", "price": 1650, "images": ["https://images.unsplash.com/photo-1551380701-5dd33d5b5d06?w=800&q=80&auto=format&fit=crop"], "categoryId": "3", "sku": "HOME-002", "stock": 22, "status": "active", "featured": true, "createdAt": "2026-10-20T10:00:00Z" },
-    { "id": "11", "name": "Non-Slip Yoga Mat", "slug": "non-slip-yoga-mat", "description": "6 mm thick, non-slip exercise mat for yoga, pilates and stretching.", "price": 1250, "discountPrice": 990, "images": ["https://images.unsplash.com/photo-1763004871583-4183d64096b1?w=800&q=80&auto=format&fit=crop"], "categoryId": "4", "sku": "SPRT-002", "stock": 35, "status": "active", "featured": false, "createdAt": "2026-10-22T10:00:00Z" },
-    { "id": "12", "name": "Insulated Steel Water Bottle", "slug": "insulated-steel-water-bottle", "description": "Double-wall stainless steel bottle that keeps drinks cold for 24 hours or hot for 12.", "price": 890, "images": ["https://images.unsplash.com/photo-1625708458528-802ec79b1ed8?w=800&q=80&auto=format&fit=crop"], "categoryId": "4", "sku": "SPRT-003", "stock": 9, "status": "active", "featured": false, "createdAt": "2026-10-24T10:00:00Z" }
+    {
+      "id": "1",
+      "name": "Wireless Noise-Cancelling Headphones",
+      "slug": "wireless-noise-cancelling-headphones",
+      "description": "Over-ear Bluetooth headphones with active noise cancellation and up to 30 hours of battery life.",
+      "price": 4500,
+      "discountPrice": 3999,
+      "images": [
+        "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "1",
+      "sku": "ELEC-001",
+      "stock": 25,
+      "status": "active",
+      "featured": true,
+      "createdAt": "2026-10-01T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "name": "RGB Mechanical Keyboard",
+      "slug": "rgb-mechanical-keyboard",
+      "description": "Compact mechanical keyboard with hot-swappable blue switches and per-key RGB lighting.",
+      "price": 5500,
+      "images": [
+        "https://images.unsplash.com/photo-1777259113729-9bda92fb8ce8?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "1",
+      "sku": "ELEC-002",
+      "stock": 12,
+      "status": "active",
+      "featured": false,
+      "createdAt": "2026-10-03T10:00:00Z"
+    },
+    {
+      "id": "3",
+      "name": "Smartwatch with Heart-Rate Monitor",
+      "slug": "smartwatch-with-heart-rate-monitor",
+      "description": "Water-resistant smartwatch with heart-rate tracking, sleep monitoring and a 7-day battery.",
+      "price": 7990,
+      "discountPrice": 6990,
+      "images": [
+        "https://images.unsplash.com/photo-1624096104992-9b4fa3a279dd?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "1",
+      "sku": "ELEC-003",
+      "stock": 6,
+      "status": "active",
+      "featured": true,
+      "createdAt": "2026-10-06T10:00:00Z"
+    },
+    {
+      "id": "4",
+      "name": "Portable Bluetooth Speaker",
+      "slug": "portable-bluetooth-speaker",
+      "description": "Rugged portable speaker with deep bass, splash resistance and 12 hours of playtime.",
+      "price": 3490,
+      "images": [
+        "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "1",
+      "sku": "ELEC-004",
+      "stock": 18,
+      "status": "active",
+      "featured": false,
+      "createdAt": "2026-10-08T10:00:00Z"
+    },
+    {
+      "id": "5",
+      "name": "Classic Cotton T-Shirt",
+      "slug": "classic-cotton-t-shirt",
+      "description": "Soft 100% cotton crew-neck t-shirt in white. A comfortable everyday basic.",
+      "price": 850,
+      "images": [
+        "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "2",
+      "sku": "FASH-001",
+      "stock": 80,
+      "status": "active",
+      "featured": true,
+      "createdAt": "2026-10-10T10:00:00Z"
+    },
+    {
+      "id": "6",
+      "name": "Denim Button-Up Jacket",
+      "slug": "denim-button-up-jacket",
+      "description": "Mid-weight blue denim jacket with a relaxed fit and classic button front.",
+      "price": 3200,
+      "discountPrice": 2790,
+      "images": [
+        "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "2",
+      "sku": "FASH-002",
+      "stock": 14,
+      "status": "active",
+      "featured": false,
+      "createdAt": "2026-10-12T10:00:00Z"
+    },
+    {
+      "id": "7",
+      "name": "Lightweight Running Sneakers",
+      "slug": "lightweight-running-sneakers",
+      "description": "Breathable, cushioned running shoes built for daily training and long walks.",
+      "price": 4200,
+      "images": [
+        "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "4",
+      "sku": "SPRT-001",
+      "stock": 0,
+      "status": "active",
+      "featured": true,
+      "createdAt": "2026-10-14T10:00:00Z"
+    },
+    {
+      "id": "8",
+      "name": "Leather Backpack",
+      "slug": "leather-backpack",
+      "description": "Genuine leather backpack with a padded laptop sleeve and two inner pockets.",
+      "price": 3800,
+      "discountPrice": 3299,
+      "images": [
+        "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "2",
+      "sku": "FASH-003",
+      "stock": 20,
+      "status": "active",
+      "featured": true,
+      "createdAt": "2026-10-16T10:00:00Z"
+    },
+    {
+      "id": "9",
+      "name": "White Ceramic Coffee Mug",
+      "slug": "white-ceramic-coffee-mug",
+      "description": "Dishwasher-safe 350 ml ceramic mug with a comfortable handle.",
+      "price": 450,
+      "images": [
+        "https://images.unsplash.com/photo-1616241673111-508b4662c707?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "3",
+      "sku": "HOME-001",
+      "stock": 60,
+      "status": "active",
+      "featured": false,
+      "createdAt": "2026-10-18T10:00:00Z"
+    },
+    {
+      "id": "10",
+      "name": "Adjustable Desk Lamp",
+      "slug": "adjustable-desk-lamp",
+      "description": "Articulating metal desk lamp with a warm light, ideal for reading and work.",
+      "price": 1650,
+      "images": [
+        "https://images.unsplash.com/photo-1551380701-5dd33d5b5d06?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "3",
+      "sku": "HOME-002",
+      "stock": 22,
+      "status": "active",
+      "featured": true,
+      "createdAt": "2026-10-20T10:00:00Z"
+    },
+    {
+      "id": "11",
+      "name": "Non-Slip Yoga Mat",
+      "slug": "non-slip-yoga-mat",
+      "description": "6 mm thick, non-slip exercise mat for yoga, pilates and stretching.",
+      "price": 1250,
+      "discountPrice": 990,
+      "images": [
+        "https://images.unsplash.com/photo-1763004871583-4183d64096b1?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "4",
+      "sku": "SPRT-002",
+      "stock": 35,
+      "status": "active",
+      "featured": false,
+      "createdAt": "2026-10-22T10:00:00Z"
+    },
+    {
+      "id": "12",
+      "name": "Insulated Steel Water Bottle",
+      "slug": "insulated-steel-water-bottle",
+      "description": "Double-wall stainless steel bottle that keeps drinks cold for 24 hours or hot for 12.",
+      "price": 890,
+      "images": [
+        "https://images.unsplash.com/photo-1625708458528-802ec79b1ed8?w=800&q=80&auto=format&fit=crop"
+      ],
+      "categoryId": "4",
+      "sku": "SPRT-003",
+      "stock": 9,
+      "status": "active",
+      "featured": false,
+      "createdAt": "2026-10-24T10:00:00Z"
+    }
   ],
   "categories": [
     { "id": "1", "name": "Electronics", "slug": "electronics", "status": "active" },
@@ -34,8 +219,18 @@
       "password": "customer123",
       "role": "customer",
       "addresses": [
-        { "fullName": "Demo Customer", "phone": "+1234567890", "address": "123 Market St, Suite 400", "city": "Dhaka" },
-        { "fullName": "Demo Work", "phone": "+1234567890", "address": "77 Innovation Ave", "city": "Chattogram" }
+        {
+          "fullName": "Demo Customer",
+          "phone": "+1234567890",
+          "address": "123 Market St, Suite 400",
+          "city": "Dhaka"
+        },
+        {
+          "fullName": "Demo Work",
+          "phone": "+1234567890",
+          "address": "77 Innovation Ave",
+          "city": "Chattogram"
+        }
       ]
     }
   ],
@@ -44,8 +239,20 @@
       "id": "1",
       "orderNumber": "ORD-10487",
       "customerId": "2",
-      "shippingAddress": { "fullName": "Sophia Bennett", "phone": "+1234567890", "address": "4140 Parker Rd", "city": "Allentown" },
-      "items": [{ "productId": "1", "productName": "Wireless Noise-Cancelling Headphones", "quantity": 1, "price": 3999 }],
+      "shippingAddress": {
+        "fullName": "Sophia Bennett",
+        "phone": "+1234567890",
+        "address": "4140 Parker Rd",
+        "city": "Allentown"
+      },
+      "items": [
+        {
+          "productId": "1",
+          "productName": "Wireless Noise-Cancelling Headphones",
+          "quantity": 1,
+          "price": 3999
+        }
+      ],
       "subtotal": 3999,
       "shippingCost": 0,
       "discount": 0,
@@ -58,9 +265,19 @@
       "id": "2",
       "orderNumber": "ORD-10486",
       "customerId": "2",
-      "shippingAddress": { "fullName": "Demo Customer", "phone": "+1234567890", "address": "123 Market St", "city": "Dhaka" },
+      "shippingAddress": {
+        "fullName": "Demo Customer",
+        "phone": "+1234567890",
+        "address": "123 Market St",
+        "city": "Dhaka"
+      },
       "items": [
-        { "productId": "2", "productName": "RGB Mechanical Keyboard", "quantity": 1, "price": 5500 },
+        {
+          "productId": "2",
+          "productName": "RGB Mechanical Keyboard",
+          "quantity": 1,
+          "price": 5500
+        },
         { "productId": "5", "productName": "Classic Cotton T-Shirt", "quantity": 2, "price": 850 }
       ],
       "subtotal": 7200,
@@ -75,8 +292,15 @@
       "id": "3",
       "orderNumber": "ORD-10485",
       "customerId": "2",
-      "shippingAddress": { "fullName": "Demo Customer", "phone": "+1234567890", "address": "123 Market St", "city": "Dhaka" },
-      "items": [{ "productId": "8", "productName": "Leather Backpack", "quantity": 1, "price": 3299 }],
+      "shippingAddress": {
+        "fullName": "Demo Customer",
+        "phone": "+1234567890",
+        "address": "123 Market St",
+        "city": "Dhaka"
+      },
+      "items": [
+        { "productId": "8", "productName": "Leather Backpack", "quantity": 1, "price": 3299 }
+      ],
       "subtotal": 3299,
       "shippingCost": 50,
       "discount": 0,
@@ -89,8 +313,20 @@
       "id": "4",
       "orderNumber": "ORD-10484",
       "customerId": "1",
-      "shippingAddress": { "fullName": "Daniel Thompson", "phone": "+1987654321", "address": "789 Pine Ave", "city": "Austin" },
-      "items": [{ "productId": "3", "productName": "Smartwatch with Heart-Rate Monitor", "quantity": 1, "price": 6990 }],
+      "shippingAddress": {
+        "fullName": "Daniel Thompson",
+        "phone": "+1987654321",
+        "address": "789 Pine Ave",
+        "city": "Austin"
+      },
+      "items": [
+        {
+          "productId": "3",
+          "productName": "Smartwatch with Heart-Rate Monitor",
+          "quantity": 1,
+          "price": 6990
+        }
+      ],
       "subtotal": 6990,
       "shippingCost": 0,
       "discount": 0,
@@ -103,8 +339,15 @@
       "id": "5",
       "orderNumber": "ORD-10483",
       "customerId": "2",
-      "shippingAddress": { "fullName": "Demo Customer", "phone": "+1234567890", "address": "123 Market St", "city": "Dhaka" },
-      "items": [{ "productId": "10", "productName": "Adjustable Desk Lamp", "quantity": 1, "price": 1650 }],
+      "shippingAddress": {
+        "fullName": "Demo Customer",
+        "phone": "+1234567890",
+        "address": "123 Market St",
+        "city": "Dhaka"
+      },
+      "items": [
+        { "productId": "10", "productName": "Adjustable Desk Lamp", "quantity": 1, "price": 1650 }
+      ],
       "subtotal": 1650,
       "shippingCost": 50,
       "discount": 0,
@@ -117,8 +360,15 @@
       "id": "6",
       "orderNumber": "ORD-10482",
       "customerId": "1",
-      "shippingAddress": { "fullName": "Isabella Wilson", "phone": "+1555444333", "address": "55 Sunset Blvd", "city": "Miami" },
-      "items": [{ "productId": "6", "productName": "Denim Button-Up Jacket", "quantity": 1, "price": 2790 }],
+      "shippingAddress": {
+        "fullName": "Isabella Wilson",
+        "phone": "+1555444333",
+        "address": "55 Sunset Blvd",
+        "city": "Miami"
+      },
+      "items": [
+        { "productId": "6", "productName": "Denim Button-Up Jacket", "quantity": 1, "price": 2790 }
+      ],
       "subtotal": 2790,
       "shippingCost": 0,
       "discount": 0,
@@ -167,12 +417,52 @@
     }
   ],
   "coupons": [
-    { "id": "1", "code": "WELCOME10", "type": "percentage", "value": 10, "minPurchase": 1000, "active": true, "usedCount": 1 }
+    {
+      "id": "1",
+      "code": "WELCOME10",
+      "type": "percentage",
+      "value": 10,
+      "minPurchase": 1000,
+      "active": true,
+      "usedCount": 1
+    }
   ],
   "inventoryTransactions": [
-    { "id": "1", "productId": "1", "productName": "Wireless Noise-Cancelling Headphones", "change": 30, "reason": "restock", "note": "Initial shipment arrival", "createdAt": "2026-10-01T09:00:00Z" },
-    { "id": "2", "productId": "1", "productName": "Wireless Noise-Cancelling Headphones", "change": -5, "reason": "sale", "note": "Order fulfillment", "createdAt": "2026-10-05T14:00:00Z" },
-    { "id": "3", "productId": "2", "productName": "RGB Mechanical Keyboard", "change": 15, "reason": "restock", "note": "Supplier delivery", "createdAt": "2026-10-03T11:00:00Z" },
-    { "id": "4", "productId": "3", "productName": "Smartwatch with Heart-Rate Monitor", "change": -2, "reason": "sale", "note": "Order fulfillment", "createdAt": "2026-10-10T16:00:00Z" }
+    {
+      "id": "1",
+      "productId": "1",
+      "productName": "Wireless Noise-Cancelling Headphones",
+      "change": 30,
+      "reason": "restock",
+      "note": "Initial shipment arrival",
+      "createdAt": "2026-10-01T09:00:00Z"
+    },
+    {
+      "id": "2",
+      "productId": "1",
+      "productName": "Wireless Noise-Cancelling Headphones",
+      "change": -5,
+      "reason": "sale",
+      "note": "Order fulfillment",
+      "createdAt": "2026-10-05T14:00:00Z"
+    },
+    {
+      "id": "3",
+      "productId": "2",
+      "productName": "RGB Mechanical Keyboard",
+      "change": 15,
+      "reason": "restock",
+      "note": "Supplier delivery",
+      "createdAt": "2026-10-03T11:00:00Z"
+    },
+    {
+      "id": "4",
+      "productId": "3",
+      "productName": "Smartwatch with Heart-Rate Monitor",
+      "change": -2,
+      "reason": "sale",
+      "note": "Order fulfillment",
+      "createdAt": "2026-10-10T16:00:00Z"
+    }
   ]
 }
