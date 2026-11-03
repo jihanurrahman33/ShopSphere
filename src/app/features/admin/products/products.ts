@@ -86,6 +86,11 @@ export class Products {
       this.query();
       this.page.set(1);
     });
+    // Deleting the last item of the last page must not leave an empty page behind.
+    effect(() => {
+      const lastPage = Math.max(1, Math.ceil(this.filtered().length / PAGE_SIZE));
+      if (this.page() > lastPage) this.page.set(lastPage);
+    });
   }
 
   protected togglePublish(product: Product): void {

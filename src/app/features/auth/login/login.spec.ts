@@ -47,6 +47,26 @@ describe('Login', () => {
     expect(navigate).toHaveBeenCalledWith('/store');
   });
 
+  it('ignores an external returnUrl and goes to the store', () => {
+    const login = vi.fn(() => of({ id: '1', name: 'A', email: 'a@x.dev', role: 'customer' as const }));
+    const { fixture, fill, submit, navigate } = setup(login);
+    fixture.componentRef.setInput('returnUrl', '//evil.example');
+    fill('input[type=email]', 'a@x.dev');
+    fill('input[type=password]', 'secret');
+    submit();
+    expect(navigate).toHaveBeenCalledWith('/store');
+  });
+
+  it('follows a safe in-app returnUrl', () => {
+    const login = vi.fn(() => of({ id: '1', name: 'A', email: 'a@x.dev', role: 'customer' as const }));
+    const { fixture, fill, submit, navigate } = setup(login);
+    fixture.componentRef.setInput('returnUrl', '/store/checkout');
+    fill('input[type=email]', 'a@x.dev');
+    fill('input[type=password]', 'secret');
+    submit();
+    expect(navigate).toHaveBeenCalledWith('/store/checkout');
+  });
+
   it('shows an alert and re-enables the button when sign-in fails', () => {
     const { fixture, el, fill, submit } = setup(() => throwError(() => new Error('Invalid email or password')));
     fill('input[type=email]', 'a@x.dev');

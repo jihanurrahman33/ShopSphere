@@ -27,6 +27,9 @@ const STATUSES: readonly ProductStatus[] = ['active', 'draft', 'archived'];
   imports: [ReactiveFormsModule, RouterLink],
   template: `
     <h1 class="mb-4 text-2xl font-bold">{{ id() ? 'Edit product' : 'New product' }}</h1>
+    @if (existing.error(); as loadError) {
+      <p role="alert" class="mb-4 text-rose-700">{{ loadError.message }}</p>
+    }
     <form [formGroup]="form" (ngSubmit)="submit()" class="grid max-w-2xl gap-4" novalidate>
       <label class="flex flex-col text-sm">Name
         <input formControlName="name" class="rounded-lg border border-gray-400 px-3 py-2" />

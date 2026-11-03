@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CartFacade } from '../../../core/facades/cart.facade';
 import { ProductRepository } from '../../../core/repositories/repositories';
@@ -14,7 +14,7 @@ import { ProductReviews } from '../product-reviews/product-reviews';
       <p role="status">Loading…</p>
     } @else if (product.error()) {
       <p role="alert" class="text-rose-700">{{ product.error()?.message }}</p>
-    } @else if (product.value(); as p) {
+    } @else if (available(); as p) {
       <article class="grid gap-8 md:grid-cols-2">
         <app-image-gallery [images]="p.images" [alt]="p.name" />
         <div>
@@ -35,6 +35,8 @@ import { ProductReviews } from '../product-reviews/product-reviews';
         </div>
       </article>
       <app-product-reviews [productId]="p.id" />
+    } @else {
+      <p role="alert" class="text-rose-700">This product is not available.</p>
     }
   `,
 })
@@ -45,5 +47,10 @@ export class ProductDetails {
   protected readonly cart = inject(CartFacade);
   private readonly repo = inject(ProductRepository);
   protected readonly quantity = signal(1);
+  /** Drafts and archived products are not shown to shoppers, even by direct link. */
+  protected readonly available = computed(() => {
+    const p = this.product.value();
+    return p?.status === 'active' ? p : undefined;
+  });
   protected readonly product = rxResource({ params: () => this.id(), stream: ({ params }) => this.repo.findById(params) });
 }

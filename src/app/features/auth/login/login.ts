@@ -3,6 +3,13 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
+const DEFAULT_RETURN_URL = '/store';
+
+/** Only in-app absolute paths are allowed as a post-login target (no `//host` or full URLs). */
+function safeReturnUrl(url: string): string {
+  return url.startsWith('/') && !url.startsWith('//') ? url : DEFAULT_RETURN_URL;
+}
+
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, RouterLink],
@@ -47,7 +54,7 @@ export class Login {
     this.busy.set(true);
     this.error.set('');
     this.auth.login(email, password).subscribe({
-      next: () => void this.router.navigateByUrl(this.returnUrl()),
+      next: () => void this.router.navigateByUrl(safeReturnUrl(this.returnUrl())),
       error: (e: Error) => {
         this.error.set(e.message);
         this.busy.set(false);

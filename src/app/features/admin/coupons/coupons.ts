@@ -147,6 +147,11 @@ export class Coupons {
       expiresAt: expiresAt ? `${expiresAt}T23:59:59Z` : null,
     };
     const current = this.editing();
+    const duplicate = (this.coupons.value() ?? []).some((c) => c.code.toUpperCase() === fields.code && c.id !== current?.id);
+    if (duplicate) {
+      this.message.set(`A coupon with the code ${fields.code} already exists.`);
+      return;
+    }
     const request: Observable<Coupon> = current
       ? this.repo.update(current.id, fields)
       : this.repo.create({ ...fields, usedCount: 0 });

@@ -1,8 +1,10 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CartFacade } from '../../../core/facades/cart.facade';
+import { ShippingAddress } from '../../../core/models';
+import { AuthService } from '../../../core/services/auth.service';
 import { OrderService } from '../../../core/services/order.service';
 
 const PHONE_PATTERN = /^\+?[0-9]{10,14}$/;
@@ -17,6 +19,16 @@ const PHONE_PATTERN = /^\+?[0-9]{10,14}$/;
     } @else {
       <div class="grid gap-8 md:grid-cols-2">
         <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4" novalidate>
+          @if (savedAddresses().length > 0) {
+            <label class="flex flex-col text-sm">Use a saved address
+              <select class="rounded-lg border border-gray-400 px-3 py-2" (change)="useAddress($any($event.target).value)">
+                <option value="">Enter a new address</option>
+                @for (a of savedAddresses(); track $index) {
+                  <option [value]="$index">{{ a.fullName }} — {{ a.address }}, {{ a.city }}</option>
+                }
+              </select>
+            </label>
+          }
           @for (field of fields; track field.name) {
             <label class="flex flex-col text-sm">{{ field.label }}
               <input [type]="field.type" [formControlName]="field.name" [attr.autocomplete]="field.autocomplete" class="rounded-lg border border-gray-400 px-3 py-2" [attr.aria-invalid]="form.controls[field.name].touched && form.controls[field.name].invalid" />
@@ -50,6 +62,7 @@ const PHONE_PATTERN = /^\+?[0-9]{10,14}$/;
 export class Checkout {
   protected readonly cart = inject(CartFacade);
   private readonly orders = inject(OrderService);
+  private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
 
   protected readonly error = signal('');
@@ -68,6 +81,13 @@ export class Checkout {
     { name: 'address', label: 'Address', type: 'text', autocomplete: 'street-address', error: 'Address is required.' },
     { name: 'city', label: 'City', type: 'text', autocomplete: 'address-level2', error: 'City is required.' },
   ] as const;
+
+  protected readonly savedAddresses = computed<readonly ShippingAddress[]>(() => this.auth.user()?.addresses ?? []);
+
+  protected useAddress(index: string): void {
+    const address = this.savedAddresses()[Number(index)];
+    if (index !== '' && address) this.form.patchValue(address);
+  }
 
   protected submit(): void {
     if (this.form.invalid) {

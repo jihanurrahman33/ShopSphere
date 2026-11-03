@@ -121,6 +121,11 @@ export class Categories {
 
   protected remove(category: Category): void {
     this.pendingDelete.set(null);
+    const children = (this.categories.value() ?? []).filter((c) => c.parentId === category.id);
+    if (children.length > 0) {
+      this.message.set(`"${category.name}" has ${children.length} sub-categor${children.length === 1 ? 'y' : 'ies'}. Move or delete them first.`);
+      return;
+    }
     const guarded = this.products.findAll({ categoryId: category.id }).pipe(
       switchMap((inUse) =>
         inUse.length > 0

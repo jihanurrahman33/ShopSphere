@@ -28,7 +28,7 @@ export class AuthService {
   readonly isAdmin = computed(() => this.user()?.role === 'admin');
 
   login(email: string, password: string): Observable<User> {
-    return this.users.findByEmail(email).pipe(
+    return this.users.findByEmail(email.trim().toLowerCase()).pipe(
       map((found) => found.find((u) => u.password === password)),
       switchMap((record) => (record ? of(record) : throwError(() => new Error('Invalid email or password')))),
       map((record) => this.toSession(record)),

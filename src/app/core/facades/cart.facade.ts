@@ -62,6 +62,23 @@ export class CartFacade {
     this._items.update((items) => items.filter((i) => i.productId !== productId));
   }
 
+  /** Refreshes name, price and stock caps from the latest catalog data (same order as the cart). */
+  sync(latest: readonly Product[]): void {
+    this._items.update((items) =>
+      items.map((item, i) => {
+        const product = latest[i];
+        if (!product || product.id !== item.productId) return item;
+        return {
+          ...item,
+          name: product.name,
+          unitPrice: product.discountPrice ?? product.price,
+          maxStock: product.stock,
+          quantity: Math.min(item.quantity, Math.max(product.stock, 1)),
+        };
+      }),
+    );
+  }
+
   applyCoupon(coupon: Coupon | null): void {
     this._coupon.set(coupon);
   }

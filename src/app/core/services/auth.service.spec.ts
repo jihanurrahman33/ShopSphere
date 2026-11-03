@@ -32,6 +32,14 @@ describe('AuthService', () => {
     expect(localStorage.getItem('shopsphere.session')).not.toContain('"password"');
   });
 
+  it('looks the email up trimmed and lower-cased', () => {
+    auth.login('  Admin@X.dev ', 'pw').subscribe();
+    const req = http.expectOne((r) => r.url === `${BASE}/users`);
+    expect(req.request.params.get('email')).toBe('admin@x.dev');
+    req.flush([admin]);
+    expect(auth.isAuthenticated()).toBe(true);
+  });
+
   it('rejects a wrong password without creating a session', () => {
     let message = '';
     auth.login('admin@x.dev', 'nope').subscribe({ error: (e: Error) => (message = e.message) });

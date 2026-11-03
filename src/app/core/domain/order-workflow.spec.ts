@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { canTransition, nextStatuses, trackingSteps } from './order-workflow';
+import { canTransition, nextStatuses, restocksInventory, trackingSteps } from './order-workflow';
+
+describe('restocksInventory', () => {
+  it('is true only for cancelled and returned', () => {
+    expect(restocksInventory('cancelled')).toBe(true);
+    expect(restocksInventory('returned')).toBe(true);
+    expect(restocksInventory('delivered')).toBe(false);
+  });
+});
 
 describe('trackingSteps', () => {
   it('marks earlier steps done, the current one current and the rest upcoming', () => {

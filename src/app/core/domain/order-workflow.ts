@@ -33,6 +33,11 @@ export function trackingSteps(status: OrderStatus): TrackingStep[] {
   }));
 }
 
+/** Cancelling or returning an order puts its items back into stock. */
+export function restocksInventory(status: OrderStatus): boolean {
+  return status === 'cancelled' || status === 'returned';
+}
+
 export function nextStatuses(status: OrderStatus): readonly OrderStatus[] {
   return TRANSITIONS[status];
 }
