@@ -1,5 +1,6 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 import { CartFacade } from '../../../core/facades/cart.facade';
 import { WishlistFacade } from '../../../core/facades/wishlist.facade';
 import { Product } from '../../../core/models';
@@ -21,42 +22,110 @@ const SORTERS: Readonly<Record<SortKey, (a: Product, b: Product) => number>> = {
   selector: 'app-products',
   imports: [ProductCard, Pagination],
   template: `
-    <h1 class="mb-4 text-2xl font-bold">Products</h1>
-    <div class="mb-6 flex flex-wrap gap-3">
-      <label class="flex flex-col text-sm">Search
-        <input type="search" class="rounded-lg border border-gray-400 px-3 py-2" [value]="query()" (input)="query.set($any($event.target).value)" />
-      </label>
-      <label class="flex flex-col text-sm">Category
-        <select class="rounded-lg border border-gray-400 px-3 py-2" (change)="categoryId.set($any($event.target).value)">
-          <option value="">All</option>
-          @for (c of activeCategories(); track c.id) {
-            <option [value]="c.id">{{ c.name }}</option>
-          }
-        </select>
-      </label>
-      <label class="flex flex-col text-sm">Sort by
-        <select class="rounded-lg border border-gray-400 px-3 py-2" (change)="sort.set($any($event.target).value)">
-          <option value="newest">Newest</option>
-          <option value="price-asc">Price: low to high</option>
-          <option value="price-desc">Price: high to low</option>
-        </select>
-      </label>
-    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-8">
+      <!-- Title & Results Count -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+            Explore All Products
+          </h1>
+          <p class="mt-1 text-sm text-gray-500">
+            Showing {{ visible().length }} items in stock and ready to ship
+          </p>
+        </div>
 
-    @if (products.isLoading()) {
-      <p role="status">Loading…</p>
-    } @else if (products.error()) {
-      <p role="alert" class="text-rose-700">{{ products.error()?.message }}</p>
-    } @else {
-      <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
-        @for (product of pageItems(); track product.id) {
-          <li><app-product-card [product]="product" [wishlisted]="wishlist.has(product.id)" (addToCart)="cart.add($event)" (wishlistToggle)="wishlist.toggle($event.id)" /></li>
-        } @empty {
-          <li>No products match your filters.</li>
-        }
-      </ul>
-      <app-pagination [total]="visible().length" [pageSize]="pageSize" [(page)]="page" />
-    }
+        <!-- Sort Select -->
+        <div class="flex items-center gap-2">
+          <label for="sort-by-select" class="text-xs font-semibold text-gray-500">Sort by:</label>
+          <select
+            id="sort-by-select"
+            class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-bold text-gray-800 shadow-2xs focus:border-[#003d29] focus:outline-none"
+            [value]="sort()"
+            (change)="sort.set($any($event.target).value)"
+          >
+            <option value="newest">Newest Arrivals</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Filter Controls Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-100 bg-white p-4 shadow-xs">
+        <!-- Search Input -->
+        <div class="relative w-full sm:w-72">
+          <input
+            type="search"
+            placeholder="Search within products..."
+            aria-label="Search within products"
+            class="w-full rounded-full border border-gray-200 bg-gray-50 py-2 pl-4 pr-10 text-xs text-gray-900 focus:border-[#003d29] focus:bg-white focus:outline-none"
+            [value]="query()"
+            (input)="query.set($any($event.target).value)"
+          />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs" aria-hidden="true">
+            🔍
+          </span>
+        </div>
+
+        <!-- Category Pills -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            class="rounded-full px-4 py-1.5 text-xs font-semibold border transition"
+            [class.btn-filter-active]="categoryId() === ''"
+            [class.btn-filter-inactive]="categoryId() !== ''"
+            (click)="categoryId.set('')"
+          >
+            All Categories
+          </button>
+          @for (c of activeCategories(); track c.id) {
+            <button
+              type="button"
+              class="rounded-full px-4 py-1.5 text-xs font-semibold border transition"
+              [class.btn-filter-active]="categoryId() === c.id"
+              [class.btn-filter-inactive]="categoryId() !== c.id"
+              (click)="categoryId.set(c.id)"
+            >
+              {{ c.name }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      @if (products.isLoading()) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
+            <div class="h-80 rounded-2xl bg-gray-100 animate-pulse"></div>
+          }
+        </div>
+      } @else if (products.error()) {
+        <p role="alert" class="rounded-xl bg-rose-50 p-4 text-rose-700 font-semibold">
+          {{ products.error()?.message }}
+        </p>
+      } @else {
+        <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          @for (product of pageItems(); track product.id) {
+            <li>
+              <app-product-card
+                [product]="product"
+                [wishlisted]="wishlist.has(product.id)"
+                (addToCart)="cart.add($event)"
+                (wishlistToggle)="wishlist.toggle($event.id)"
+              />
+            </li>
+          } @empty {
+            <li class="col-span-full rounded-2xl border border-gray-100 bg-white p-12 text-center text-gray-500">
+              No products found matching your search criteria.
+            </li>
+          }
+        </ul>
+
+        <div class="pt-6">
+          <app-pagination [total]="visible().length" [pageSize]="pageSize" [(page)]="page" />
+        </div>
+      }
+    </div>
   `,
 })
 export class Products {
@@ -64,6 +133,7 @@ export class Products {
   protected readonly wishlist = inject(WishlistFacade);
   private readonly productRepo = inject(ProductRepository);
   private readonly categoryRepo = inject(CategoryRepository);
+  private readonly route = inject(ActivatedRoute);
 
   protected readonly products = rxResource({ stream: () => this.productRepo.findAll({ status: 'active' }) });
   protected readonly categories = rxResource({ stream: () => this.categoryRepo.findAll() });
@@ -74,11 +144,14 @@ export class Products {
   protected readonly page = signal(1);
   protected readonly pageSize = PAGE_SIZE;
 
-  /** Only active categories are offered as filters. */
   protected readonly activeCategories = computed(() => (this.categories.value() ?? []).filter((c) => c.status === 'active'));
 
   constructor() {
-    // Any filter or sort change restarts from the first page.
+    this.route.queryParams.subscribe((params) => {
+      this.categoryId.set(params['categoryId'] ?? '');
+      this.query.set(params['q'] ?? '');
+    });
+
     effect(() => {
       this.query();
       this.categoryId();
@@ -92,7 +165,7 @@ export class Products {
     const category = this.categoryId();
     return (this.products.value() ?? [])
       .filter((p) => (!category || p.categoryId === category) && p.name.toLowerCase().includes(q))
-      .sort(SORTERS[this.sort()]); // filter() already returned a copy; source is not mutated
+      .sort(SORTERS[this.sort()]);
   });
 
   protected readonly pageItems = computed(() => {

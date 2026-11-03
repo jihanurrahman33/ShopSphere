@@ -12,7 +12,7 @@ import { OrderStatus } from '../../../core/models';
           <li class="flex items-center gap-2 text-sm" [attr.aria-current]="step.state === 'current' ? 'step' : null">
             <span
               class="inline-flex size-6 items-center justify-center rounded-full border-2 text-xs font-bold"
-              [class]="step.state === 'upcoming' ? 'border-gray-400 text-gray-700' : 'border-violet-700 bg-violet-700 text-white'"
+              [class]="step.state === 'upcoming' ? 'border-gray-300 text-gray-500 bg-gray-50' : 'border-[#003d29] bg-[#003d29] text-white'"
               aria-hidden="true"
               >{{ step.state === 'done' ? '✓' : '' }}</span
             >

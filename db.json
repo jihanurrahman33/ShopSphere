@@ -20,13 +20,159 @@
     { "id": "4", "name": "Sports & Outdoors", "slug": "sports-and-outdoors", "status": "active" }
   ],
   "users": [
-    { "id": "1", "name": "Admin", "email": "admin@shopsphere.dev", "password": "admin123", "role": "admin" },
-    { "id": "2", "name": "Demo Customer", "email": "customer@shopsphere.dev", "password": "customer123", "role": "customer" }
+    {
+      "id": "1",
+      "name": "Admin",
+      "email": "admin@shopsphere.dev",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "password": "customer123",
+      "role": "customer",
+      "addresses": [
+        { "fullName": "Demo Customer", "phone": "+1234567890", "address": "123 Market St, Suite 400", "city": "Dhaka" },
+        { "fullName": "Demo Work", "phone": "+1234567890", "address": "77 Innovation Ave", "city": "Chattogram" }
+      ]
+    }
   ],
-  "orders": [],
-  "reviews": [],
+  "orders": [
+    {
+      "id": "1",
+      "orderNumber": "ORD-10487",
+      "customerId": "2",
+      "shippingAddress": { "fullName": "Sophia Bennett", "phone": "+1234567890", "address": "4140 Parker Rd", "city": "Allentown" },
+      "items": [{ "productId": "1", "productName": "Wireless Noise-Cancelling Headphones", "quantity": 1, "price": 3999 }],
+      "subtotal": 3999,
+      "shippingCost": 0,
+      "discount": 0,
+      "total": 3999,
+      "status": "delivered",
+      "paymentStatus": "paid",
+      "createdAt": "2026-11-01T14:30:00Z"
+    },
+    {
+      "id": "2",
+      "orderNumber": "ORD-10486",
+      "customerId": "2",
+      "shippingAddress": { "fullName": "Demo Customer", "phone": "+1234567890", "address": "123 Market St", "city": "Dhaka" },
+      "items": [
+        { "productId": "2", "productName": "RGB Mechanical Keyboard", "quantity": 1, "price": 5500 },
+        { "productId": "5", "productName": "Classic Cotton T-Shirt", "quantity": 2, "price": 850 }
+      ],
+      "subtotal": 7200,
+      "shippingCost": 0,
+      "discount": 720,
+      "total": 6480,
+      "status": "shipped",
+      "paymentStatus": "paid",
+      "createdAt": "2026-11-02T10:15:00Z"
+    },
+    {
+      "id": "3",
+      "orderNumber": "ORD-10485",
+      "customerId": "2",
+      "shippingAddress": { "fullName": "Demo Customer", "phone": "+1234567890", "address": "123 Market St", "city": "Dhaka" },
+      "items": [{ "productId": "8", "productName": "Leather Backpack", "quantity": 1, "price": 3299 }],
+      "subtotal": 3299,
+      "shippingCost": 50,
+      "discount": 0,
+      "total": 3349,
+      "status": "processing",
+      "paymentStatus": "paid",
+      "createdAt": "2026-11-03T09:00:00Z"
+    },
+    {
+      "id": "4",
+      "orderNumber": "ORD-10484",
+      "customerId": "1",
+      "shippingAddress": { "fullName": "Daniel Thompson", "phone": "+1987654321", "address": "789 Pine Ave", "city": "Austin" },
+      "items": [{ "productId": "3", "productName": "Smartwatch with Heart-Rate Monitor", "quantity": 1, "price": 6990 }],
+      "subtotal": 6990,
+      "shippingCost": 0,
+      "discount": 0,
+      "total": 6990,
+      "status": "delivered",
+      "paymentStatus": "paid",
+      "createdAt": "2026-10-28T16:20:00Z"
+    },
+    {
+      "id": "5",
+      "orderNumber": "ORD-10483",
+      "customerId": "2",
+      "shippingAddress": { "fullName": "Demo Customer", "phone": "+1234567890", "address": "123 Market St", "city": "Dhaka" },
+      "items": [{ "productId": "10", "productName": "Adjustable Desk Lamp", "quantity": 1, "price": 1650 }],
+      "subtotal": 1650,
+      "shippingCost": 50,
+      "discount": 0,
+      "total": 1700,
+      "status": "pending",
+      "paymentStatus": "unpaid",
+      "createdAt": "2026-11-03T18:45:00Z"
+    },
+    {
+      "id": "6",
+      "orderNumber": "ORD-10482",
+      "customerId": "1",
+      "shippingAddress": { "fullName": "Isabella Wilson", "phone": "+1555444333", "address": "55 Sunset Blvd", "city": "Miami" },
+      "items": [{ "productId": "6", "productName": "Denim Button-Up Jacket", "quantity": 1, "price": 2790 }],
+      "subtotal": 2790,
+      "shippingCost": 0,
+      "discount": 0,
+      "total": 2790,
+      "status": "confirmed",
+      "paymentStatus": "paid",
+      "createdAt": "2026-10-25T11:00:00Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "1",
+      "productId": "1",
+      "userId": "2",
+      "userName": "Demo Customer",
+      "rating": 5,
+      "comment": "Exceptional noise cancellation and punchy bass! Battery easily lasts over 25 hours.",
+      "createdAt": "2026-10-15T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "productId": "1",
+      "userId": "1",
+      "userName": "Sophia Bennett",
+      "rating": 5,
+      "comment": "Super comfortable for long studio work sessions. Crisp highs and warm lows.",
+      "createdAt": "2026-10-20T14:30:00Z"
+    },
+    {
+      "id": "3",
+      "productId": "2",
+      "userId": "2",
+      "userName": "Demo Customer",
+      "rating": 5,
+      "comment": "Tactile clicks are so satisfying, per-key RGB lighting modes look stunning.",
+      "createdAt": "2026-10-22T09:15:00Z"
+    },
+    {
+      "id": "4",
+      "productId": "8",
+      "userId": "2",
+      "userName": "Demo Customer",
+      "rating": 5,
+      "comment": "Genuine leather feels premium and the laptop compartment is well padded.",
+      "createdAt": "2026-10-27T16:00:00Z"
+    }
+  ],
   "coupons": [
-    { "id": "1", "code": "WELCOME10", "type": "percentage", "value": 10, "minPurchase": 1000, "active": true, "usedCount": 0 }
+    { "id": "1", "code": "WELCOME10", "type": "percentage", "value": 10, "minPurchase": 1000, "active": true, "usedCount": 1 }
   ],
-  "inventoryTransactions": []
+  "inventoryTransactions": [
+    { "id": "1", "productId": "1", "productName": "Wireless Noise-Cancelling Headphones", "change": 30, "reason": "restock", "note": "Initial shipment arrival", "createdAt": "2026-10-01T09:00:00Z" },
+    { "id": "2", "productId": "1", "productName": "Wireless Noise-Cancelling Headphones", "change": -5, "reason": "sale", "note": "Order fulfillment", "createdAt": "2026-10-05T14:00:00Z" },
+    { "id": "3", "productId": "2", "productName": "RGB Mechanical Keyboard", "change": 15, "reason": "restock", "note": "Supplier delivery", "createdAt": "2026-10-03T11:00:00Z" },
+    { "id": "4", "productId": "3", "productName": "Smartwatch with Heart-Rate Monitor", "change": -2, "reason": "sale", "note": "Order fulfillment", "createdAt": "2026-10-10T16:00:00Z" }
+  ]
 }

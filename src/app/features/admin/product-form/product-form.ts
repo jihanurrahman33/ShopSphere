@@ -79,9 +79,17 @@ const STATUSES: readonly ProductStatus[] = ['active', 'draft', 'archived'];
       <label class="flex items-center gap-2 text-sm"><input type="checkbox" formControlName="featured" /> Featured</label>
 
       @if (error(); as message) { <p role="alert" class="text-rose-700">{{ message }}</p> }
-      <div class="flex gap-3">
-        <button type="submit" class="rounded-lg bg-violet-700 px-5 py-2 font-medium text-white hover:bg-violet-800 disabled:bg-gray-400" [disabled]="busy()">{{ busy() ? 'Saving…' : 'Save product' }}</button>
-        <a routerLink="/admin/products" class="rounded-lg border border-gray-400 px-5 py-2">Cancel</a>
+      <div class="flex items-center gap-3 pt-2">
+        <button
+          type="submit"
+          class="rounded-full bg-[#003d29] px-6 py-2.5 font-bold text-xs text-white shadow-xs hover:bg-[#002e1f] disabled:bg-gray-400 cursor-pointer disabled:cursor-not-allowed transition"
+          [disabled]="busy()"
+        >
+          {{ busy() ? 'Saving…' : 'Save Product' }}
+        </button>
+        <a routerLink="/admin/products" class="rounded-full border border-gray-300 bg-white px-5 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 transition">
+          Cancel
+        </a>
       </div>
     </form>
   `,
