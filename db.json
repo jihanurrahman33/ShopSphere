@@ -13,6 +13,7 @@
     { "id": "2", "name": "Demo Customer", "email": "customer@shopsphere.dev", "password": "customer123", "role": "customer" }
   ],
   "orders": [],
+  "reviews": [],
   "coupons": [
     { "id": "1", "code": "WELCOME10", "type": "percentage", "value": 10, "minPurchase": 1000, "active": true, "usedCount": 0 }
   ],

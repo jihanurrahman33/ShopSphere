@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category, Coupon, InventoryTransaction, Order, Product, UserRecord } from '../models';
+import { Category, Coupon, InventoryTransaction, Order, Product, Review, UserRecord } from '../models';
 import { BaseRepository } from './base.repository';
 
 @Injectable({ providedIn: 'root' })
@@ -44,6 +44,21 @@ export class CouponRepository extends BaseRepository<Coupon> {
 
   findByCode(code: string): Observable<Coupon[]> {
     return this.findAll({ code, active: true });
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class ReviewRepository extends BaseRepository<Review> {
+  constructor() {
+    super('reviews');
+  }
+
+  findByProduct(productId: string): Observable<Review[]> {
+    return this.findAll({ productId, _sort: 'createdAt', _order: 'desc' });
+  }
+
+  findByProductAndUser(productId: string, userId: string): Observable<Review[]> {
+    return this.findAll({ productId, userId });
   }
 }
 

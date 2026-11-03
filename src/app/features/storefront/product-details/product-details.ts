@@ -3,10 +3,12 @@ import { Component, inject, input, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CartFacade } from '../../../core/facades/cart.facade';
 import { ProductRepository } from '../../../core/repositories/repositories';
+import { ImageGallery } from '../../../shared/components/image-gallery/image-gallery';
+import { ProductReviews } from '../product-reviews/product-reviews';
 
 @Component({
   selector: 'app-product-details',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, ImageGallery, ProductReviews],
   template: `
     @if (product.isLoading()) {
       <p role="status">Loading…</p>
@@ -14,7 +16,7 @@ import { ProductRepository } from '../../../core/repositories/repositories';
       <p role="alert" class="text-rose-700">{{ product.error()?.message }}</p>
     } @else if (product.value(); as p) {
       <article class="grid gap-8 md:grid-cols-2">
-        <div class="flex aspect-square items-center justify-center rounded-2xl bg-gray-100 text-8xl" aria-hidden="true">🛍️</div>
+        <app-image-gallery [images]="p.images" [alt]="p.name" />
         <div>
           <h1 class="text-3xl font-bold">{{ p.name }}</h1>
           <p class="mt-2 text-2xl font-bold text-violet-700">{{ (p.discountPrice ?? p.price) | currency: 'BDT' : 'symbol-narrow' : '1.0-0' }}</p>
@@ -32,6 +34,7 @@ import { ProductRepository } from '../../../core/repositories/repositories';
           </div>
         </div>
       </article>
+      <app-product-reviews [productId]="p.id" />
     }
   `,
 })

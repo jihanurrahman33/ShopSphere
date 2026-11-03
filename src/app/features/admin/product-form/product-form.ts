@@ -4,7 +4,14 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Va
 import { Router, RouterLink } from '@angular/router';
 import { Product, ProductStatus } from '../../../core/models';
 import { CategoryRepository, ProductRepository } from '../../../core/repositories/repositories';
+import { parseImageUrls } from '../../../core/domain/images';
 import { slugify } from '../../../core/utils/slugify';
+
+/** Every non-blank line must be an http(s) URL. */
+function imageUrlsValid(control: AbstractControl): ValidationErrors | null {
+  const { invalid } = parseImageUrls(String(control.value ?? ''));
+  return invalid.length > 0 ? { badImageUrl: invalid[0] } : null;
+}
 
 /** Group validator: a discount, when present, must be lower than the price. */
 function discountBelowPrice(group: AbstractControl): ValidationErrors | null {
@@ -62,6 +69,10 @@ const STATUSES: readonly ProductStatus[] = ['active', 'draft', 'archived'];
           @for (s of statuses; track s) { <option [value]="s">{{ s }}</option> }
         </select>
       </label>
+      <label class="flex flex-col text-sm">Image URLs (one per line, http or https)
+        <textarea formControlName="imageUrls" rows="3" class="rounded-lg border border-gray-400 px-3 py-2"></textarea>
+        @if (invalid('imageUrls')) { <span role="alert" class="text-rose-700">Each line must be a valid http(s) URL.</span> }
+      </label>
       <label class="flex items-center gap-2 text-sm"><input type="checkbox" formControlName="featured" /> Featured</label>
 
       @if (error(); as message) { <p role="alert" class="text-rose-700">{{ message }}</p> }
@@ -99,6 +110,7 @@ export class ProductForm {
       stock: [0, [Validators.required, Validators.min(0), Validators.pattern(/^\d+$/)]],
       status: ['draft' as ProductStatus],
       featured: [false],
+      imageUrls: ['', imageUrlsValid],
     },
     { validators: discountBelowPrice },
   );
@@ -106,7 +118,7 @@ export class ProductForm {
   constructor() {
     effect(() => {
       const product = this.existing.value();
-      if (product) this.form.patchValue(product);
+      if (product) this.form.patchValue({ ...product, imageUrls: product.images.join('\n') });
     });
   }
 
@@ -121,9 +133,10 @@ export class ProductForm {
       return;
     }
     const value = this.form.getRawValue();
-    const { discountPrice, ...rest } = value;
+    const { discountPrice, imageUrls, ...rest } = value;
     const payload = {
       ...rest,
+      images: parseImageUrls(imageUrls).urls,
       ...(discountPrice != null ? { discountPrice } : {}),
       slug: slugify(value.name),
     } satisfies Partial<Product>;
@@ -133,7 +146,7 @@ export class ProductForm {
     const id = this.id();
     const request = id
       ? this.repo.update(id, { ...payload, discountPrice: discountPrice ?? null })
-      : this.repo.create({ ...payload, images: [], createdAt: new Date().toISOString() });
+      : this.repo.create({ ...payload, createdAt: new Date().toISOString() });
     request.subscribe({
       next: () => void this.router.navigateByUrl('/admin/products'),
       error: (e: Error) => {

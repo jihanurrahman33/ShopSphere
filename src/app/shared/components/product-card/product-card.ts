@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '../../../core/models';
@@ -6,10 +6,16 @@ import { Product } from '../../../core/models';
 /** Presentational component: data in via input(), events out via output(). */
 @Component({
   selector: 'app-product-card',
-  imports: [CurrencyPipe, RouterLink],
+  imports: [CurrencyPipe, NgOptimizedImage, RouterLink],
   template: `
     <article class="flex h-full flex-col rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-      <div class="mb-3 flex aspect-square items-center justify-center rounded-lg bg-gray-100 text-4xl" aria-hidden="true">🛍️</div>
+      <div class="relative mb-3 flex aspect-square items-center justify-center overflow-hidden rounded-lg bg-gray-100 text-4xl" aria-hidden="true">
+        @if (product().images[0]; as src) {
+          <img [ngSrc]="src" alt="" fill class="object-cover" />
+        } @else {
+          🛍️
+        }
+      </div>
       <h3 class="font-semibold text-gray-900">
         <a [routerLink]="['/store/products', product().id]" class="hover:underline focus-visible:outline-2 focus-visible:outline-violet-700">{{ product().name }}</a>
       </h3>

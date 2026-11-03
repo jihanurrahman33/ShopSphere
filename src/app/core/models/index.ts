@@ -103,6 +103,17 @@ export interface Order {
 
 export type NewOrder = Omit<Order, 'id'>;
 
+export interface Review {
+  id: EntityId;
+  productId: EntityId;
+  userId: EntityId;
+  userName: string;
+  /** Whole number 1–5. */
+  rating: number;
+  comment: string;
+  createdAt: string;
+}
+
 export type InventoryReason = 'sale' | 'restock' | 'adjustment' | 'return';
 
 /** One stock movement; `change` is signed (negative = stock out). */

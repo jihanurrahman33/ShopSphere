@@ -27,7 +27,8 @@ Coupon to try: `WELCOME10` (10% off, minimum 1000).
 ## Features
 
 **Storefront** (`/store`): product list with search, category filter and sort · product details ·
-cart with coupons and shipping · checkout · orders · account (profile, address book) · wishlist · register/login.
+cart with coupons and shipping · checkout · orders with tracking and printable invoice · account (profile, address book) ·
+wishlist · product photos gallery and reviews · register/login.
 
 **Admin** (`/admin`, admin role): dashboard (revenue comparison, 7-day sales, recent orders, top sellers) ·
 products (create/edit, search, pagination) · categories · orders (status workflow) · inventory (stock adjustments + history) ·
@@ -67,4 +68,5 @@ Business rules (order workflow, coupon rules, stock, reports) are pure functions
   a real backend must enforce them (and store hashed passwords).
 - `db.json` stores demo passwords in plain text. Never reuse them.
 - Stock/coupon/ledger updates are separate requests and are not atomic.
-- Not built yet: product images/variants/reviews, order detail & tracking pages, real payments, component tests.
+- Product images are URLs (no upload backend). Reviews and ratings are open to any signed-in user, one per product.
+- Not built yet: product variants (size/colour), real payments, file upload, deployment config.
